@@ -10,6 +10,7 @@ var bg ;
 
 function preload() {
     // create getBackgroundImg( ) here
+    backgroundImg = loadImage("sunrise4.png")
 }
 
 function setup(){
@@ -22,9 +23,10 @@ function setup(){
 function draw(){
 
     // add condition to check if any background image is there to add
-
-
+    if(backgroundImg)
+    background(backgroundImg);
     Engine.update(engine);
+    
 
     // write code to display time in correct format here
 
@@ -35,14 +37,31 @@ async function getBackgroundImg(){
 
     // write code to fetch time from API
 
+    var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+    var responseType = await response.json();
+    console.log(responseType);
+
     //change the data in JSON format
+
+ var dt = responseType.datetime
+    console.log(dt);
 
     // write code slice the datetime
 
+    var hour = dt.slice(11,13)
+    console.log(hour);  
 
     // add conditions to change the background images from sunrise to sunset
 
+if(hour>=06&&hour<=18)
 
     //load the image in backgroundImg variable here
+    {
+        bg = "sunrise4.png"
+        }
+        else{
+            bg = "sunrise11.png"
+        }
+        backgroundImg = loadImage(bg)
+        }
 
-}
